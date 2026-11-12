@@ -1,101 +1,287 @@
-@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+:root {
+  --bg: #0b1020;
+  --panel: #12192f;
+  --line: #2a3352;
+  --text: #e6e9f5;
+  --muted: #8b93b3;
+  --accent: #f5c815;
+  --accent-2: #ff8a3d;
+  --error: #ff7a85;
+}
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  background-color: #f5c815;
-  color: rgb(0, 0, 0);
-  font-family: 'Arial', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  overflow: hidden;
   margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
+.shell {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: min(940px, 100%);
+  min-height: 560px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--panel);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+/* Left promo panel */
+.promo {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(150deg, var(--accent), var(--accent-2));
+  color: #1a1300;
+}
+
+.promo-inner {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 44px;
+}
+
+.logo {
+  position: absolute;
+  top: 40px;
+  left: 44px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.promo h2 {
+  margin: 0;
+  font-size: 40px;
+  letter-spacing: -0.03em;
+}
+
+.promo p {
+  max-width: 320px;
+  margin: 12px 0 0;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.blob {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.blob.one {
+  width: 280px;
+  height: 280px;
+  top: -60px;
+  right: -80px;
+}
+
+.blob.two {
+  width: 160px;
+  height: 160px;
+  top: 150px;
+  right: 120px;
+  background: rgba(26, 19, 0, 0.08);
+}
+
+/* Form panel */
 .container {
-  background-color: rgba(0, 0, 0, 0.4);
-  padding: 20px 40px;
-  border-radius: 5px;
+  padding: 56px 48px;
 }
 
 .container h1 {
-  text-align: center;
-  margin-bottom: 30px;
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: -0.02em;
 }
 
-.container a {
+.sub {
+  margin: 8px 0 28px;
+  color: var(--muted);
+}
+
+.form-control {
+  position: relative;
+  margin: 10px 0 18px;
+}
+
+.form-control input {
+  display: block;
+  width: 100%;
+  padding: 18px 0 10px;
+  border: 0;
+  border-bottom: 2px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 17px;
+  transition: border-color 0.3s;
+}
+
+.form-control input:focus {
+  outline: 0;
+  border-bottom-color: var(--accent);
+}
+
+.form-control.invalid input {
+  border-bottom-color: var(--error);
+}
+
+.form-control label {
+  position: absolute;
+  top: 18px;
+  left: 0;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.form-control label span {
+  display: inline-block;
+  min-width: 5px;
+  font-size: 17px;
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Wave the letters up when focused or filled */
+.form-control input:focus + label span,
+.form-control input.filled + label span {
+  color: var(--accent);
+  font-size: 13px;
+  transform: translateY(-24px);
+}
+
+.toggle {
+  position: absolute;
+  right: 0;
+  top: 16px;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.toggle:hover {
+  color: var(--text);
+}
+
+.error {
+  min-height: 18px;
+  margin: 6px 0 0;
+  color: var(--error);
+  font-size: 13px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 6px 0 24px;
+  font-size: 14px;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.remember input {
+  accent-color: var(--accent);
+}
+
+.link {
+  color: var(--accent);
   text-decoration: none;
-  color: #565d84;
+}
+
+.link:hover {
+  text-decoration: underline;
 }
 
 .btn {
-  cursor: pointer;
-  display: inline-block;
   width: 100%;
-  background: #565d84;
   padding: 15px;
-  font-family: inherit;
-  font-size: 16px;
   border: 0;
-  border-radius: 5px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #1a1300;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s, filter 0.2s;
 }
 
-.btn:focus {
-  outline: 0;
+.btn:hover {
+  filter: brightness(1.05);
 }
 
 .btn:active {
   transform: scale(0.98);
 }
 
+.btn:focus-visible,
+.toggle:focus-visible,
+.link:focus-visible {
+  outline: 3px solid rgba(245, 200, 21, 0.4);
+  outline-offset: 2px;
+}
+
+.success {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(74, 222, 128, 0.12);
+  color: #86efac;
+  font-size: 14px;
+}
+
 .text {
-  margin-top: 30px;
+  margin: 28px 0 0;
+  color: var(--muted);
+  text-align: center;
+  font-size: 14px;
 }
 
-.form-control {
-  position: relative;
-  margin: 20px 0 40px;
-  width: 300px;
-}
+@media (max-width: 760px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
 
-.form-control input {
-  background-color: transparent;
-  border: 0;
-  border-bottom: 2px #fff solid;
-  display: block;
-  width: 100%;
-  padding: 15px 0;
-  font-size: 18px;
-  color: #fff;
-}
+  .promo-inner {
+    min-height: 200px;
+    padding: 28px;
+  }
 
-.form-control input:focus,
-.form-control input:valid {
-  outline: 0;
-  border-bottom-color: lightblue;
-}
+  .logo {
+    top: 24px;
+    left: 28px;
+  }
 
-.form-control label {
-  position: absolute;
-  top: 15px;
-  left: 0;
-  pointer-events: none;
-}
+  .promo h2 {
+    font-size: 30px;
+  }
 
-.form-control label span {
-  display: inline-block;
-  font-size: 18px;
-  min-width: 5px;
-  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.form-control input:focus + label span,
-.form-control input:valid + label span {
-  color: #565d84;
-  transform: translateY(-30px);
+  .container {
+    padding: 36px 28px;
+  }
 }
